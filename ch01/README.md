@@ -19,8 +19,8 @@
 ### 实操
 
 文件编写：
-* [hello_server.c]()
-* [hello_client.c]()
+* [hello_server.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch01/hello_server.c)
+* [hello_client.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch01/hello_client.c)
 
 进入文件所在的根目录，编译并进行“打电话”：
 * 服务器端：
@@ -39,3 +39,7 @@ gcc hello_client.c -o hclient  //编译生成hserver
 1.服务端和客户端要分开：如果为同一台电脑，可以使用两个终端进行；如果不同的电脑需要搞清楚输入ip为**服务端的本地ip**。
 
 2.通过终端ifcong，查看分配的本地ip
+
+3.顺序一定是先服务器端再客户端
+
+4.运行一次过后就需要更改服务器的端口号
