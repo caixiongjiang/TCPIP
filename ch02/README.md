@@ -82,8 +82,8 @@ protocol: 计算机间通信中使用的协议信息
 ### 2.1.6 面向连接的套接字：TCP套接字示例
 
 在第一章的代码做出修改，
-* 服务端没有变化：[tcp_server.c]()
-* 客户端更改read函数调用的方式（分多次调用read函数）：[tcp_client]()
+* 服务端没有变化：[tcp_server.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch02/tcp_server.c)
+* 客户端更改read函数调用的方式（分多次调用read函数）：[tcp_client](https://github.com/caixiongjiang/TCPIP/blob/master/ch02/tcp_client.c)
 
 实操：
 * 服务器端：
