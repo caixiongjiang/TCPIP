@@ -114,8 +114,8 @@ Function read call count: 13 #13个字节
 修改前面的tcp_server.c和tcp_client.c，使服务端分多次调用write函数传输数据，客户端只调用一次读取。
 
 编写文件：
-* [tcp_server_kehou.c]()
-* [tcp_client_kehou.c]()
+* [tcp_server_kehou.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch02/tcp_server_kehou.c)
+* [tcp_client_kehou.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch02/tcp_client_kehou.c)
 
 实操：
 * 服务端：
