@@ -122,3 +122,29 @@ file descriptor 3: 5
 ## 1.3 基于Windows平台的实现
 
 暂时先不学，需要用了再学！
+
+## 课后练习7
+
+使用底层I/O编写文件复制程序,这里复制的是之前的data.txt。
+
+编写文件：
+* [low_copy.c]()
+
+进入文件路径下，编译并运行：
+```shell
+gcc low_copy.c -o lcopy
+./lcopy
+
+cat copy.txt
+```
+
+结果：
+```
+file descriptor: 3 
+file descriptor: 4 
+
+Let's go!
+���@P^���@�@0_��
+```
+
+前面的复制对了，不知道后面的没有文字怎么出现的乱码，奇怪，难道我写的[low_copy.c]()有问题，如果有大神能解决可以帮我看一下，十分感谢！
