@@ -108,3 +108,35 @@ Function read call count: 13 #13个字节
 ## 2.2 Windows平台下的实现
 
 略，用到时再学！
+
+## 2.3 课后作业第六题
+
+修改前面的tcp_server.c和tcp_client.c，使服务端分多次调用write函数传输数据，客户端只调用一次读取。
+
+编写文件：
+* [tcp_server_kehou.c]()
+* [tcp_client_kehou.c]()
+
+实操：
+* 服务端：
+```shell
+gcc tcp_server_kehou.c -o tserverkh
+./tserverkh 9090
+```
+
+* 客户端
+```shell
+gcc tcp_client_kehou.c -o tclientkh
+./tclientkh 172.16.127.128 9090
+```
+
+结果：
+客户端出现：
+```
+# 等待3000ms
+wait time 0
+wait time 1
+···
+wait time 2999
+Message from server : Hello World!
+```
