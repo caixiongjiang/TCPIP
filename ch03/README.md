@@ -256,3 +256,9 @@ addr.sin_family = AF_INET;                 //制定地址族
 addr.sin_addr.s_addr = inet_addr(serv_ip); //基于字符串的IP地址初始化
 addr.sin_port = htons(atoi(serv_port));    //基于字符串的IP地址端口号初始化
 ```
+
+## 3.5 基于Windows端的实现
+
+略
+
+## 3.6 习题
