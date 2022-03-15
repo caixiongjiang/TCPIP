@@ -23,15 +23,18 @@ int main(int argc, char *argv[])
         printf("Usage : %s <port>\n", argv[0]);
         exit(1);
     }
+    /* 创建服务器端套接字 */
     serv_sock = socket(PF_INET, SOCK_STREAM, 0);//调用 socket 函数创建套接字
     if (serv_sock == -1)
         error_handling("socket() error");
 
+    /* 地址信息初始化 */
     memset(&serv_addr, 0, sizeof(serv_addr));
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    serv_addr.sin_port = htons(atoi(argv[1]));
+    serv_addr.sin_family = AF_INET;//ipv4协议
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);//利用常数INADDR_ANY自动获取服务器端的ip地址，并转换为网络字节序
+    serv_addr.sin_port = htons(atoi(argv[1]));//初始化端口号，并将其转化网络字节序
 
+    /* 分配地址信息 */
     if (bind(serv_sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1)//调用 bind 函数分配ip地址和端口号
         error_handling("bind() error");
     

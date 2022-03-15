@@ -140,7 +140,7 @@ l 代表 long
 
 
 编写代码：
-* ![endian_conv.c]()
+* [endian_conv.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch03/endian_conv.c)
 
 
 编译运行
@@ -158,3 +158,101 @@ Network ordered address: 0x78563412
 ```
 
 **这是在小端 CPU 的运行结果。大部分人会得到相同的结果，因为 Intel 和 AMD 的 CPU 都是小端序为标准。**
+
+## 3.4 网络地址的初始化和分配
+
+### 3.4.1 将字符串信息转换为网络字节序的整数型
+
+如何把类似于 201.211.214.36 转换为 4 字节的整数类型数据 ?
+
+* 1.inet_addr函数
+
+```c++
+#include <arpa/inet.h>
+in_addr_t inet_addr(const char* string);
+```
+
+如果向该函数传递类似“211.214.107.99”的点分十进制格式的字符串，它会将其转换为32位整数型数据并返回。
+
+具体示例：
+[inet_addr.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch03/inet_addr.c)
+
+编译运行：
+```shell
+gcc inet_addr.c -o addr
+./addr
+```
+
+结果：
+```
+Network ordered integer addr: 0x4030201
+Error occured!
+```
+
+
+* 2.inet_aton函数
+
+inet_aton 函数与 inet_addr 函数在功能上完全相同，也是将字符串形式的IP地址转换成整数型的IP地址。**只不过该函数用了 in_addr 结构体，如果传递in_addr结构体的变量地址值，函数会自动把结果填入该结构体变量。**
+
+```c++
+#include <arpa/inet.h>
+int inet_aton(const char *string, struct in_addr *addr);
+/*
+成功时返回 1 ，失败时返回 0
+string: 含有需要转换的IP地址信息的字符串地址值
+addr: 将保存转换结果的 in_addr 结构体变量的地址值
+*/
+```
+
+
+具体示例：
+[inet_aton.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch03/inet_aton.c)
+
+编译运行：
+```shell
+gcc inet_aton.c -o aton
+./aton
+```
+
+结果：
+```
+Network ordered integer addr: 0x4f7ce87f
+```
+
+* 还有一个函数，与 inet_aton() 正好相反，它可以把网络字节序整数型IP地址转换成我们熟悉的字符串形式，函数原型如下：
+
+```c++
+#include <arpa/inet.h>
+char *inet_ntoa(struct in_addr adr);
+```
+
+该函数将通过参数传入的整数型IP地址转换为字符串格式并返回。**但要小心，返回值为 char 指针，返回字符串地址意味着字符串已经保存在内存空间，但是该函数未向程序员要求分配内存，而是再内部申请了内存保存了字符串。**也就是说调用了该函数候要立即把信息复制到其他内存空间。因此，若再次调用 inet_ntoa 函数，则有可能覆盖之前保存的字符串信息。
+
+示例：
+[inet_ntoa.c](https://github.com/caixiongjiang/TCPIP/blob/master/ch03/inet_ntoa.c)
+
+编译运行：
+```shell
+gcc inet_ntoa.c -o ntoa
+./ntoa
+```
+
+结果：
+```
+Dotted-Decimal notation1: 1.2.3.4
+Dotted-Decimal notation2: 1.1.1.1
+Dotted-Decimal notation3: 1.2.3.4
+```
+
+### 3.4.2 网络地址初始化
+
+常见的套接字创建的过程：
+```c++
+struct sockaddr_in addr;
+char *serv_ip = "211.217,168.13";          //声明IP地址族
+char *serv_port = "9190";                  //声明端口号字符串
+memset(&addr, 0, sizeof(addr));            //结构体变量 addr 的所有成员初始化为0
+addr.sin_family = AF_INET;                 //制定地址族
+addr.sin_addr.s_addr = inet_addr(serv_ip); //基于字符串的IP地址初始化
+addr.sin_port = htons(atoi(serv_port));    //基于字符串的IP地址端口号初始化
+```
