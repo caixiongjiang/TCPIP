@@ -23,11 +23,11 @@ int main(int argc, char *argv[])
     sock = socket(PF_INET, SOCK_STREAM, 0);
     if (sock == -1)
         error_handling("socket() error");
-
+    //初始化ip和端口号，值为目标服务器端的套接字的ip和端口号
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = inet_addr(argv[1]);
-    serv_addr.sin_port = htons(atoi(argv[2]));
+    serv_addr.sin_addr.s_addr = inet_addr(argv[1]);//输入的一个字符串
+    serv_addr.sin_port = htons(atoi(argv[2]));//输入的第二个字符串
     //调用 connect 函数向服务器发送连接请求
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1)
         error_handling("connect() error!");
