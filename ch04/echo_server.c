@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
     clnt_adr_sz = sizeof(clnt_adr);
 
     //处理5个客户端
-    for(int i = 0; i < 5; ++i)
+    for(i = 0; i < 5; ++i)
     {
         /*
         受理客户端的连接请求
@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
         if(clnt_sock == -1)
             error_handling("accept() error");
         else
-            prinf("Connect client %d \n", i + 1);
+            printf("Connect client %d \n", i + 1);
         /*回声服务的实现*/
         /*读取数据
         参数：传输套接字

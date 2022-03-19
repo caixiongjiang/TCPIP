@@ -22,12 +22,12 @@ int main(int argc, char* argv[])
     sock = socket(PF_INET, SOCK_STREAM, 0);
     if(sock == -1)
         error_handling("socket() error");
-
+    /*初始化*/
     memset(&serv_adr, 0, sizeof(serv_adr));
     serv_adr.sin_family = AF_INET;
     serv_adr.sin_addr.s_addr = inet_addr(argv[1]);//string转大端序整型
     serv_adr.sin_port = htons(atoi(argv[2]));
-
+    /*建立连接*/
     if(connect(sock, (struct sockaddr*)&serv_adr, sizeof(serv_adr)) == -1)
         error_handling("connect() error");
     else
@@ -37,10 +37,10 @@ int main(int argc, char* argv[])
     {
         fputs("Input message(Q to quit): ", stdout);
         fgets(message, BUF_SIZE, stdin);
-
+        //实现按q或者Q退出
         if(!strcmp(message, "q\n") || !strcmp(message, "Q\n"))
             break;
-
+        
         write(sock, message, strlen(message));
         str_len = read(sock, message, BUF_SIZE - 1);
         message[str_len] = 0;
