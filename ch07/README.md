@@ -1,7 +1,5 @@
 ## 第 7 章 优雅的断开套接字的连接
 
-本章代码，在[TCP-IP-NetworkNote](https://github.com/riba2534/TCP-IP-NetworkNote)中可以找到。
-
 本章讨论如何优雅的断开套接字的连接，之前用的方法不够优雅是因为，我们是调用 close 函数或 closesocket 函数单方面断开连接的。
 
 ### 7.1 基于 TCP 的半关闭
