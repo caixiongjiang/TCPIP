@@ -7,3 +7,4 @@
 * 第四章：[基于TCP的服务器端/客户端（1）](https://github.com/caixiongjiang/TCPIP/tree/master/ch04)
 * 第五章：[基于TCP的服务器端/客户端（2）](https://github.com/caixiongjiang/TCPIP/tree/master/ch05)
 * 第六章：[基于UDP的服务器端/客户端](https://github.com/caixiongjiang/TCPIP/tree/master/ch06)
+* 第七章：[优雅地断开套接字连接](https://github.com/caixiongjiang/TCPIP/tree/master/ch07)
