@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     alarm(2);
 
-    for(int i = 0; i < 3; ++i)
+    for(i = 0; i < 3; ++i)
     {
 	puts("wait...");
 	sleep(100);

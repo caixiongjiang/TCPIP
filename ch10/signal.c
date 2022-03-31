@@ -6,7 +6,7 @@
 void timeout(int sig)
 {
     if(sig == SIGALRM)
-	    puts("Time out!")
+	    puts("Time out!");
     alarm(2);
 }
 
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     alarm(2);//2s后产生SIGALRM信号
     
     //注意：一旦产生信号，调用了信号处理器，会唤醒sleep函数而离开阻塞的状态
-    for(int i = 0; i < 3; ++i)
+    for(i = 0; i < 3; ++i)
     {
         puts("wait...");
         sleep(100);
