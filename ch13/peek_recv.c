@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	acpt_sock = socket(PF_INET, SOCK_STREAM, 0);
 	memset(&acpt_adr, 0, sizeof(acpt_adr));
 	acpt_adr.sin_family = AF_INET;
-	acpt_adr.sin_addr.s_addr = htonl(INADDR_ANY)；
+	acpt_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	acpt_adr.sin_port = htons(atoi(argv[1]));
 
 	if(bind(acpt_sock, (struct sockaddr*) &acpt_adr, sizeof(acpt_adr)) == -1)
@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
 
 	while(1)
 	{
+		//MSG_DONTWAIT是为了保证即使不存在待读取数据也不会进入阻塞状态
+		//设置MSG_PEEK选项并调用recv函数，即使读取了输入缓冲的数据也不会删除（也就是还可以再用read()读一遍）
 		str_len = recv(recv_sock, buf, sizeof(buf) - 1, MSG_PEEK|MSG_DONTWAIT);
 		if(str_len > 0)
 			break;
