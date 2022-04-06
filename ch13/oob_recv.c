@@ -1,5 +1,5 @@
-#include <stdio.h>
 //接收端
+#include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 #include <signal.h>
