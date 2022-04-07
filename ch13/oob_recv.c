@@ -1,11 +1,12 @@
 //接收端
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <string.h>
 #include <signal.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <fcnt1.h>
+#include <fcntl.h>
 
 #define BUF_SIZE 30
 void error_handling(char *message);
@@ -48,7 +49,7 @@ int main(int argc, char *argv[])
 
 	//文件描述符recv_sock指向的套接字拥有者(F_SETOWN)改成把getpid函数返回值用作ID的进程
 	//这里原本的拥有者为操作系统负责套接字所有事务的主体
-	fcnt1(recv_sock, F_SETOWN, getpid());
+	fcntl(recv_sock, F_SETOWN, getpid());
 	//收到MSG_OOB的紧急消息时，操作系统将发出SIGURG信号
 	state = sigaction(SIGURG, &act, 0);
 
@@ -56,7 +57,7 @@ int main(int argc, char *argv[])
 	{
 		if(str_len == -1)//接受消息失败
 			continue;
-		buf[BUF_SIZE] = 0;
+		buf[str_len] = 0;
 		puts(buf);
 	}
 	close(recv_sock);
